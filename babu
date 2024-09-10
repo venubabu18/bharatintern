@@ -1,0 +1,51 @@
+pipeline {
+    agent any  // Runs the pipeline on any available agent (i.e., Jenkins node)
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from the Git repository
+                git 'https://github.com/your-username/your-repo.git'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                // Example build step
+                echo 'Building...'
+                // For example, running a build script or command
+                // sh 'mvn clean install'   // Uncomment if you are using Maven
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                // Example test step
+                echo 'Testing...'
+                // For example, running tests
+                // sh 'mvn test'   // Uncomment if you are using Maven
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                // Example deploy step
+                echo 'Deploying...'
+                // For example, deploying to a server
+                // sh './deploy.sh'   // Uncomment if you have a deployment script
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+        always {
+            echo 'This will always run, regardless of success or failure.'
+        }
+    }
+}
